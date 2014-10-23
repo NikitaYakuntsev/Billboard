@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class User(models.Model):
     id_user = models.IntegerField(primary_key=True)
@@ -7,10 +8,10 @@ class User(models.Model):
     password = models.CharField(max_length=30)
     description = models.TextField(max_length=1000)
 
-class Category(models.Model):
-    id_category = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=30)
-    adverts = models.ManyToManyField(Advert, through=CategoryAndAdvert)
+
+class Report(models.Model):
+    id_report = models.IntegerField(primary_key=True)
+    text = models.TextField(max_length=300)
 
 
 class Advert(models.Model):
@@ -21,11 +22,16 @@ class Advert(models.Model):
     price = models.IntegerField()
     date = models.DateField()
     id_report = models.ForeignKey(Report)
+    categories = models.ManyToManyField('Category', through='CategoryAndAdvert')
+
+class Category(models.Model):
+    id_category = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=30)
+    #adverts = models.ManyToManyField(Advert, through=CategoryAndAdvert)
+
 
 class CategoryAndAdvert(models.Model):
     id_advert = models.ForeignKey(Advert)
     id_category = models.ForeignKey(Category)
 
-class Report(models.Model):
-    id_report = models.IntegerField(primary_key=True)
-    text = models.TextField(max_length=300)
+
