@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
-import BillboardTask.views
+import BillboardTask
+from BillboardTask import views
+from BillboardTask.models import Category
 
 
 admin.autodiscover()
@@ -13,5 +15,5 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', BillboardTask.views.main),
-    #url(r'^(?P<category_name>\d+)/$', views.category, name='category'),
+    url(r'^(?P<cname>[A-Za-z]{1,})/$', views.category_view, name = 'Category.name'),
 )

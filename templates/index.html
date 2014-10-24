@@ -6,15 +6,15 @@
 </head>
 <body>
 
-{% if cats %}
+{% if all_categories %}
     <ul>
-    {% for cat in cats %}
-        <li>{{ cat.name }}</li>
+    {% for cat in all_categories %}
+        <li><a href="{% url 'Category.name' cat.name %}">{{ cat.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No categories are available.</p>
-{% endif %}
+ {% endif %}
 
 </body>
 </html>

@@ -3,19 +3,19 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    id_user = models.IntegerField(primary_key=True)
+    #id_user = models.IntegerField(primary_key=True)
     login = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
     description = models.TextField(max_length=1000)
 
 
 class Report(models.Model):
-    id_report = models.IntegerField(primary_key=True)
+    #id_report = models.IntegerField(primary_key=True)
     text = models.TextField(max_length=300)
 
 
 class Advert(models.Model):
-    id_advert = models.IntegerField(primary_key=True)
+    #id_advert = models.IntegerField(primary_key=True)
     id_user = models.ForeignKey(User)
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=1000)
@@ -25,8 +25,8 @@ class Advert(models.Model):
     categories = models.ManyToManyField('Category', through='CategoryAndAdvert')
 
 class Category(models.Model):
-    id_category = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=30)
+    #id_category = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=30, unique=True)
     #adverts = models.ManyToManyField(Advert, through=CategoryAndAdvert)
 
 

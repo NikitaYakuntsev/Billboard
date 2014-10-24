@@ -1,9 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from BillboardTask import models
+from BillboardTask.models import Category
 
 # Create your views here.
 def main(request):
-    #return HttpResponse("Hello world")
-    cats = models.Category.objects.all()
-    return render(request, 'index.html', cats)
+    cats = Category.objects.all()
+    context = {"all_categories" : cats}
+    return render(request, 'index.html', context)
+
+
+def category_view(request, cname):
+    category_list = Category.objects.filter(name = cname)
+    return render(request, 'category.html', category_list)
+
