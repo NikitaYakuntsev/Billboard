@@ -12,6 +12,7 @@ class User(models.Model):
 class Report(models.Model):
     #id_report = models.IntegerField(primary_key=True)
     text = models.TextField(max_length=300)
+    id_advert = models.ForeignKey('Advert')
 
 
 class Advert(models.Model):
@@ -21,7 +22,6 @@ class Advert(models.Model):
     text = models.TextField(max_length=1000)
     price = models.IntegerField()
     date = models.DateField()
-    id_report = models.ForeignKey(Report)
     categories = models.ManyToManyField('Category', through='CategoryAndAdvert')
 
 class Category(models.Model):

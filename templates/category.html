@@ -8,7 +8,7 @@
 {% if advert_list %}
     <ul>
     {% for adv in advert_list %}
-        <li>{{ cat.name }}</li>
+        <li><a href="{% url 'Advert.id' catname adv.id %}">{{ adv.title }} + {{ adv.id }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

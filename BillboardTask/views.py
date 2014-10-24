@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from BillboardTask.models import Category, CategoryAndAdvert, Advert
 
@@ -13,13 +13,29 @@ def category_view(request, cname):
     #id of category with name = cname
     category = Category.objects.get(name__exact=cname)
 
-    adverts = Category.objects.all().filter(CategoryAndAdvert.id_category__exact == category.id)
-
-    context = {"advert_list" : adverts}
+    common = CategoryAndAdvert.objects.filter(id_category_id = category.id)
+    ads = []
+    for adv in common:
+        tmp = Advert.objects.get(id = adv.id_advert_id)
+        ads.append(tmp)
+    context = {"advert_list" : ads,
+               "catname" : cname}
     return render(request, 'category.html', context)
 
-def advert_view(request, advid):
-    adv = Advert.objects.get(pk=advid)
+def advert_view(request, cname, advid):
 
-    return render(request, 'advert.html', adv) #check if you can give an object
+    category = Category.objects.get(name__exact=cname)
+
+    #protection if user tries to change addres with wrong id
+    if not CategoryAndAdvert.objects.filter(id_category_id = category.id).filter(id_advert_id = advid).exists():
+        raise Http404
+    else:
+        adv = Advert.objects.get(pk=advid)
+
+        advert = {"name" : adv.title,
+                  "price" : adv.price,
+                  "text" : adv.text,
+                  "date" : adv.date,
+                  "catname" : cname}
+        return render(request, 'advert.html', advert) #check if you can give an object
 
