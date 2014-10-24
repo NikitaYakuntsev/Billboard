@@ -10,6 +10,7 @@ def main(request):
 
 
 def category_view(request, cname):
-    category_list = Category.objects.filter(name = cname)
-    return render(request, 'category.html', category_list)
+    categories = Category.objects.filter(name = cname)
+    context = {"category_list" : categories}
+    return render(request, 'category.html', context)
 
