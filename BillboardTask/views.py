@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from BillboardTask.models import Category
+from BillboardTask.models import Category, CategoryAndAdvert, Advert
 
 # Create your views here.
 def main(request):
@@ -10,7 +10,16 @@ def main(request):
 
 
 def category_view(request, cname):
-    categories = Category.objects.filter(name = cname)
-    context = {"category_list" : categories}
+    #id of category with name = cname
+    category = Category.objects.get(name__exact=cname)
+
+    adverts = Category.objects.all().filter(CategoryAndAdvert.id_category__exact == category.id)
+
+    context = {"advert_list" : adverts}
     return render(request, 'category.html', context)
+
+def advert_view(request, advid):
+    adv = Advert.objects.get(pk=advid)
+
+    return render(request, 'advert.html', adv) #check if you can give an object
 
