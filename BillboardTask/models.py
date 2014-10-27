@@ -1,12 +1,13 @@
 from django.db import models
-
+from django.forms import ModelForm
+from django import forms
 
 # Create your models here.
 class User(models.Model):
     #id_user = models.IntegerField(primary_key=True)
     login = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
-    description = models.TextField(max_length=1000)
+    description = models.EmailField(max_length=1000)
     def __unicode__(self):
         return str(self.id) +". " + str(self.login)
 
@@ -45,3 +46,7 @@ class CategoryAndAdvert(models.Model):
         return str(self.id_advert_id) + " & " + str(self.id_category_id)
 
 
+class RegistrationForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ["login","password","description"]

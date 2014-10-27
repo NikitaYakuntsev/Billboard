@@ -14,7 +14,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', BillboardTask.views.main), # /
+    url(r'^register/', views.register, name='Registration'),
+    url(r'^$', BillboardTask.views.main),
     url(r'^(?P<cname>[A-Za-z]{1,})/$', views.category_view, name = 'Category.name'), # /<cat_name>/
     url(r'^(?P<cname>[A-Za-z]{1,})/(?P<advid>\d+)/$', views.advert_view, name = 'Advert.id'), # /<cat_name>/<adv_id>
 )

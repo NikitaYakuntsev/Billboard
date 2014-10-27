@@ -7,11 +7,12 @@
 <body>
 
 {% if all_categories %}
-    <ul>
+    <table border="1" style="color:black" align="left">
     {% for cat in all_categories %}
-        <li><a href="{% url 'Category.name' cat.name %}">{{ cat.name }}</a></li>
+        <tr><td><a href="{% url 'Category.name' cat.name %}">{{ cat.name }}</a></td></tr>
     {% endfor %}
-    </ul>
+        <tr><td><a href="register"> Registration </a></td></tr>
+    </table>
 {% else %}
     <p>No categories are available.</p>
  {% endif %}

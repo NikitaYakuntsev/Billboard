@@ -6,11 +6,11 @@
 </head>
 <body>
 {% if advert_list %}
-    <ul>
+     <table border="1" style="color:black" align="left">
     {% for adv in advert_list %}
-        <li><a href="{% url 'Advert.id' catname adv.id %}">{{ adv.title }} + {{ adv.id }}</a></li>
+        <tr><td><a href="{% url 'Advert.id' catname adv.id %}">{{ adv.title }}</a></td></tr>
     {% endfor %}
-    </ul>
+    </table>
 {% else %}
     <p>No adverts for this category are available.</p>
 {% endif %}
