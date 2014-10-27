@@ -5,13 +5,13 @@
     <title></title>
 </head>
 <body>
-
+<a href="{% url 'Registration' %}"> Registration </a><br><br>
 {% if all_categories %}
     <table border="1" style="color:black" align="left">
     {% for cat in all_categories %}
         <tr><td><a href="{% url 'Category.name' cat.name %}">{{ cat.name }}</a></td></tr>
     {% endfor %}
-        <tr><td><a href="register"> Registration </a></td></tr>
+
     </table>
 {% else %}
     <p>No categories are available.</p>

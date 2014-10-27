@@ -1,6 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
-from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm,User
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
+from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm, User
 # Create your views here.
 def main(request):
     cats = Category.objects.all()
@@ -8,19 +10,23 @@ def main(request):
     return render(request, 'index.html', context)
 
 def register(request):
-    if request.method == "POST":
-        reg_form = RegistrationForm(request.POST)
-        if reg_form.is_valid():
-            user = reg_form.save()
-            User = user
-            User.save()
-    else:
-        reg_form = RegistrationForm()
-    return render(request,'register.html', {'reg_form': reg_form})
+    reg_form = RegistrationForm()
+    return  render(request, 'register.html', {'reg_form': reg_form})
+
+def process_register(request):
+    log = request.POST.get("login")
+    passw = request.POST.get("password")
+    email = request.POST.get("email")
+    user = User(login = log, password = passw, description = email)
+    user.save()
+    return HttpResponse('Success ' + str(user))
 
 def category_view(request, cname):
     #id of category with name = cname
-    category = Category.objects.get(name__exact=cname)
+    try:
+        category = Category.objects.get(name__exact=cname)
+    except ObjectDoesNotExist:
+        raise Http404
 
     common = CategoryAndAdvert.objects.filter(id_category_id = category.id)
     ads = []
