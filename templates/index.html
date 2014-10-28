@@ -5,7 +5,10 @@
     <title></title>
 </head>
 <body>
-<a href="{% url 'Registration' %}"> Registration </a><br><br>
+<a href="{% url 'Registration' %}"> Registration </a><br>
+<a href="{% url 'Login' %}"> Login  </a> <br>
+<a href="{% url 'Logout' %}"> Logout  </a>
+<br><br>
 {% if all_categories %}
     <table border="1" style="color:black" align="left">
     {% for cat in all_categories %}

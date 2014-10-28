@@ -1,14 +1,15 @@
 from django.db import models
 from django.forms import ModelForm
 from django import forms
+from django.contrib.auth.models import User
 
 # Create your models here.
-class User(models.Model):
-    login = models.CharField(max_length=30) #todo unique login
-    password = models.CharField(max_length=30)
-    email = models.EmailField(max_length=1000)
-    def __unicode__(self):
-        return str(self.id) + ". " + str(self.login)
+#class User(models.Model):
+#    login = models.CharField(max_length=30) #todo unique login
+#    password = models.CharField(max_length=30)
+#    email = models.EmailField(max_length=1000)
+#    def __unicode__(self):
+#        return str(self.id) + ". " + str(self.login)
 
 
 class Report(models.Model):
@@ -45,4 +46,8 @@ class CategoryAndAdvert(models.Model):
 class RegistrationForm(ModelForm):
     class Meta:
         model = User
-        fields = ["login", "password", "email"]
+        fields = ["username", "password", "email"]
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    password = forms.CharField(max_length=30)

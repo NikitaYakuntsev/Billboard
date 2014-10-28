@@ -6,4 +6,4 @@ from BillboardTask.models import Category, Advert, CategoryAndAdvert, User
 admin.site.register(Category)
 admin.site.register(Advert)
 admin.site.register(CategoryAndAdvert)
-admin.site.register(User)
+#admin.site.register(User)

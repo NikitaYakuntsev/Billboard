@@ -1,10 +1,10 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm, User
-
+from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm,LoginForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 def main(request):
@@ -12,37 +12,43 @@ def main(request):
     context = {"all_categories" : cats}
     return render(request, 'index.html', context)
 
-def login_view(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        if user.is_active:
-            login(request, user)
-            return HttpResponse('Success ' + str(user))
-        else:
-            return HttpResponse('Disabled account ' + str(user))
-    else:
-        return HttpResponse('Invaild login ')
-
 def logout_view(request):
     logout(request)
+    return main(request)
 
 def register(request):
     reg_form = RegistrationForm()
     if request.method=='POST':
         reg_form = RegistrationForm(request.POST)
         if reg_form.is_valid():
-            log = request.POST.get("login")
+            log = request.POST.get("username")
             passw = request.POST.get("password")
             e_mail = request.POST.get("email")
-            user = User(login=log, password=passw, email=e_mail)
-            if User.objects.filter(login=log).count() == 0:
+            user = User(username=log, password=passw, email=e_mail)
+            if User.objects.filter(username=log).count() == 0:
                 user.save()
                 return HttpResponse('Success ' + str(user))
             else:
                 return HttpResponse('Nickname already used ' + str(user))
     return render(request, 'register.html', {'reg_form': reg_form})
+
+def login_view(request):
+    log_form = LoginForm()
+    if request.method=='POST':
+        log_form = LoginForm(request.POST)
+        if log_form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponse('Success ' + str(user))
+                else:
+                    return HttpResponse('Disabled user ' + str(user))
+            else:
+                return HttpResponse('Invaild login ')
+    return render(request, 'login.html', {'log_form': log_form})
 
 def category_view(request, cname):
     try:
