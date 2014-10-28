@@ -4,7 +4,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm,LoginForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,UserManager
 
 # Create your views here.
 def main(request):
@@ -24,9 +24,8 @@ def register(request):
             log = request.POST.get("username")
             passw = request.POST.get("password")
             e_mail = request.POST.get("email")
-            user = User(username=log, password=passw, email=e_mail)
             if User.objects.filter(username=log).count() == 0:
-                user.save()
+                user = User.objects.create_user(username=log, password=passw, email=e_mail)
                 return HttpResponse('Success ' + str(user))
             else:
                 return HttpResponse('Nickname already used ' + str(user))

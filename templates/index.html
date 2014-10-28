@@ -5,9 +5,14 @@
     <title></title>
 </head>
 <body>
-<a href="{% url 'Registration' %}"> Registration </a><br>
-<a href="{% url 'Login' %}"> Login  </a> <br>
-<a href="{% url 'Logout' %}"> Logout  </a>
+    <table border="1" style="color:black" align="left">
+    <tr>
+    <td><a href="{% url 'Registration' %}"> Registration </a></td>
+    <td><a href="{% url 'Login' %}"> Login  </a></td>
+    <td><a href="{% url 'Logout' %}"> Logout </a></td>
+    <td><a href="admin/"> Admin  </a> <br></td>
+    </tr>
+    </table>
 <br><br>
 {% if all_categories %}
     <table border="1" style="color:black" align="left">
