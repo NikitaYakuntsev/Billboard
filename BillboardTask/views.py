@@ -1,26 +1,48 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm, User
+
+
 # Create your views here.
 def main(request):
     cats = Category.objects.all()
     context = {"all_categories" : cats}
     return render(request, 'index.html', context)
 
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        if user.is_active:
+            login(request, user)
+            return HttpResponse('Success ' + str(user))
+        else:
+            return HttpResponse('Disabled account ' + str(user))
+    else:
+        return HttpResponse('Invaild login ')
+
+def logout_view(request):
+    logout(request)
+
 def register(request):
     reg_form = RegistrationForm()
+    if request.method=='POST':
+        reg_form = RegistrationForm(request.POST)
+        if reg_form.is_valid():
+            log = request.POST.get("login")
+            passw = request.POST.get("password")
+            e_mail = request.POST.get("email")
+            user = User(login=log, password=passw, email=e_mail)
+            if User.objects.filter(login=log).count() == 0:
+                user.save()
+                return HttpResponse('Success ' + str(user))
+            else:
+                return HttpResponse('Nickname already used ' + str(user))
     return render(request, 'register.html', {'reg_form': reg_form})
-
-def process_register(request):
-    #todo http://djbook.ru/rel1.5/topics/auth/default.html#user-objects
-    #todo change it!!
-    log = request.POST.get("login")
-    passw = request.POST.get("password")
-    email = request.POST.get("email")
-    user = User(login = log, password = passw, description = email)
-    user.save()
-    return HttpResponse('Success ' + str(user))
 
 def category_view(request, cname):
     try:

@@ -6,7 +6,7 @@ from django import forms
 class User(models.Model):
     login = models.CharField(max_length=30) #todo unique login
     password = models.CharField(max_length=30)
-    description = models.EmailField(max_length=1000)
+    email = models.EmailField(max_length=1000)
     def __unicode__(self):
         return str(self.id) + ". " + str(self.login)
 
@@ -45,4 +45,4 @@ class CategoryAndAdvert(models.Model):
 class RegistrationForm(ModelForm):
     class Meta:
         model = User
-        fields = ["login", "password", "description"]
+        fields = ["login", "password", "email"]
