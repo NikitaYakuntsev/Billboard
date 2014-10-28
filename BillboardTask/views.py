@@ -1,7 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm, User
 # Create your views here.
 def main(request):
@@ -11,9 +10,11 @@ def main(request):
 
 def register(request):
     reg_form = RegistrationForm()
-    return  render(request, 'register.html', {'reg_form': reg_form})
+    return render(request, 'register.html', {'reg_form': reg_form})
 
 def process_register(request):
+    #todo http://djbook.ru/rel1.5/topics/auth/default.html#user-objects
+    #todo change it!!
     log = request.POST.get("login")
     passw = request.POST.get("password")
     email = request.POST.get("email")
@@ -22,7 +23,6 @@ def process_register(request):
     return HttpResponse('Success ' + str(user))
 
 def category_view(request, cname):
-    #id of category with name = cname
     try:
         category = Category.objects.get(name__exact=cname)
     except ObjectDoesNotExist:
@@ -38,7 +38,6 @@ def category_view(request, cname):
     return render(request, 'category.html', context)
 
 def advert_view(request, cname, advid):
-
     category = Category.objects.get(name__exact=cname)
 
     #protection if user tries to change addres with wrong id
@@ -52,4 +51,4 @@ def advert_view(request, cname, advid):
                   "text" : adv.text,
                   "date" : adv.date,
                   "catname" : cname}
-        return render(request, 'advert.html', advert) #check if you can give an object
+        return render(request, 'advert.html', advert)

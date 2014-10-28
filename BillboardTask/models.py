@@ -4,16 +4,14 @@ from django import forms
 
 # Create your models here.
 class User(models.Model):
-    #id_user = models.IntegerField(primary_key=True)
-    login = models.CharField(max_length=30)
+    login = models.CharField(max_length=30) #todo unique login
     password = models.CharField(max_length=30)
     description = models.EmailField(max_length=1000)
     def __unicode__(self):
-        return str(self.id) +". " + str(self.login)
+        return str(self.id) + ". " + str(self.login)
 
 
 class Report(models.Model):
-    #id_report = models.IntegerField(primary_key=True)
     text = models.TextField(max_length=300)
     id_advert = models.ForeignKey('Advert')
     def __unicode__(self):
@@ -21,20 +19,18 @@ class Report(models.Model):
 
 
 class Advert(models.Model):
-    #id_advert = models.IntegerField(primary_key=True)
     id_user = models.ForeignKey(User)
     title = models.CharField(max_length=50)
     text = models.TextField(max_length=1000)
     price = models.IntegerField()
     date = models.DateField()
+    #todo remove through and model
     categories = models.ManyToManyField('Category', through='CategoryAndAdvert')
     def __unicode__(self):
         return str(self.id) + ". " + str(self.title)
 
 class Category(models.Model):
-    #id_category = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=30, unique=True)
-    #adverts = models.ManyToManyField(Advert, through=CategoryAndAdvert)
     def __unicode__(self):
         return str(self.id) + ". " + str(self.name)
 
@@ -49,4 +45,4 @@ class CategoryAndAdvert(models.Model):
 class RegistrationForm(ModelForm):
     class Meta:
         model = User
-        fields = ["login","password","description"]
+        fields = ["login", "password", "description"]
