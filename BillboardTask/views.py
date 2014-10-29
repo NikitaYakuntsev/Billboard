@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from BillboardTask.models import Category, CategoryAndAdvert, Advert,RegistrationForm,LoginForm
+from BillboardTask.models import Category,  Advert,RegistrationForm,LoginForm
 from django.contrib.auth.models import User,UserManager
 
 # Create your views here.
@@ -28,7 +28,7 @@ def register(request):
                 user = User.objects.create_user(username=log, password=passw, email=e_mail)
                 return HttpResponse('Success ' + str(user))
             else:
-                return HttpResponse('Nickname already used ' + str(user))
+                return HttpResponse('Nickname already used ' + str(log))
     return render(request, 'register.html', {'reg_form': reg_form})
 
 def login_view(request):
@@ -55,10 +55,10 @@ def category_view(request, cname):
     except ObjectDoesNotExist:
         raise Http404
 
-    common = CategoryAndAdvert.objects.filter(id_category_id = category.id)
+    common = Advert.objects.filter(categories__id=category.id)
     ads = []
     for adv in common:
-        tmp = Advert.objects.get(id = adv.id_advert_id)
+        tmp = Advert.objects.get(id=adv.id)
         ads.append(tmp)
     context = {"advert_list": ads,
                "catname": cname}
@@ -68,7 +68,7 @@ def advert_view(request, cname, advid):
     category = Category.objects.get(name__exact=cname)
 
     #protection if user tries to change addres with wrong id
-    if not CategoryAndAdvert.objects.filter(id_category_id = category.id).filter(id_advert_id = advid).exists():
+    if not Advert.objects.filter(categories__id=category.id).filter(id=advid).exists():
         raise Http404
     else:
         adv = Advert.objects.get(pk=advid)

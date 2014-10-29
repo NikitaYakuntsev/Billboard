@@ -4,12 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 # Create your models here.
-#class User(models.Model):
-#    login = models.CharField(max_length=30) #todo unique login
-#    password = models.CharField(max_length=30)
-#    email = models.EmailField(max_length=1000)
-#    def __unicode__(self):
-#        return str(self.id) + ". " + str(self.login)
+
 
 
 class Report(models.Model):
@@ -25,8 +20,7 @@ class Advert(models.Model):
     text = models.TextField(max_length=1000)
     price = models.IntegerField()
     date = models.DateField()
-    #todo remove through and model
-    categories = models.ManyToManyField('Category', through='CategoryAndAdvert')
+    categories = models.ManyToManyField('Category')#, through='CategoryAndAdvert')
     def __unicode__(self):
         return str(self.id) + ". " + str(self.title)
 
@@ -36,17 +30,18 @@ class Category(models.Model):
         return str(self.id) + ". " + str(self.name)
 
 
-class CategoryAndAdvert(models.Model):
-    id_advert = models.ForeignKey(Advert)
-    id_category = models.ForeignKey(Category)
-    def __unicode__(self):
-        return str(self.id_advert_id) + " & " + str(self.id_category_id)
-
 
 class RegistrationForm(ModelForm):
     class Meta:
         model = User
         fields = ["username", "password", "email"]
+    def clean(self):
+        super(ModelForm, self).clean()
+        mail = self.cleaned_data.get("email")
+        if mail is None or mail == "":
+            raise forms.ValidationError("Email is empty!")
+        return self.cleaned_data
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=30)
