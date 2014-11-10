@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 import BillboardTask
 from BillboardTask import views
 
@@ -21,3 +22,5 @@ urlpatterns = patterns('',
     url(r'^(?P<cname>[A-Za-z]{1,})/$', views.category_view, name = 'Category.name'), # /<cat_name>/
     url(r'^(?P<cname>[A-Za-z]{1,})/(?P<advid>\d+)/$', views.advert_view, name = 'Advert.id'), # /<cat_name>/<adv_id>
 )
+
+urlpatterns += staticfiles_urlpatterns()

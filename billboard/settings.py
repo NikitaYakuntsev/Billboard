@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'billboard',
     'BillboardTask',
+    'django.contrib.staticfiles',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,6 +83,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'files'),
+    os.path.join(BASE_DIR, 'main_files'),
+    os.path.join(BASE_DIR, 'cmadvert_files'),
+)
+
+
+
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),

@@ -9,7 +9,8 @@ from django.contrib.auth.models import User,UserManager
 # Create your views here.
 def main(request):
     cats = Category.objects.all()
-    context = {"all_categories" : cats}
+    context = {"all_categories" : cats,
+               "auth" : request.user.is_authenticated()}
     return render(request, 'index.html', context)
 
 def logout_view(request):
@@ -61,7 +62,8 @@ def category_view(request, cname):
         tmp = Advert.objects.get(id=adv.id)
         ads.append(tmp)
     context = {"advert_list": ads,
-               "catname": cname}
+               "catname": cname,
+               "auth" : request.user.is_authenticated()}
     return render(request, 'category.html', context)
 
 def advert_view(request, cname, advid):
@@ -77,5 +79,9 @@ def advert_view(request, cname, advid):
                   "price" : adv.price,
                   "text" : adv.text,
                   "date" : adv.date,
-                  "catname" : cname}
+                  "catname" : cname,
+                  "address" : adv.address,
+                  #"phone" : adv.phone,
+                  "image" : adv.image,
+                  "auth" : request.user.is_authenticated()}
         return render(request, 'advert.html', advert)

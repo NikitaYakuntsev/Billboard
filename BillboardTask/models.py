@@ -20,12 +20,15 @@ class Advert(models.Model):
     text = models.TextField(max_length=1000)
     price = models.IntegerField()
     date = models.DateField()
+    address = models.TextField(max_length=300)
     categories = models.ManyToManyField('Category')#, through='CategoryAndAdvert')
+    image = models.TextField(max_length=300)
     def __unicode__(self):
         return str(self.id) + ". " + str(self.title)
 
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
+    image = models.TextField(max_length=300)
     def __unicode__(self):
         return str(self.id) + ". " + str(self.name)
 
