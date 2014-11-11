@@ -1,739 +1,162 @@
-<!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns#">
-
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<head>
-    <meta charset="UTF-8">
+{% extends 'index.html' %}
+{% block main_column %}
     {% load staticfiles %}
-    <title>{{ name }}</title>
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="apple-itunes-app" content="app-id=646370450">
-    <meta name="description" content="{{ name }}">
-    <meta property="og:title" content="{{ name }}">
-    <meta property="og:type" content="article">
-    <meta property="og:image" content="http://www.cmlt.ru/getUserImage?id=5955251">
-    <meta property="og:url" content="https://www.cmlt.ru/ad-b3022073">
-    <meta property="og:description" content="{{ name }}">
-    <meta property="fb:page_id" content="118849741503525">
-
     <link href="{% static "cmadvert_files/main0000.css" %}" rel="stylesheet" type="text/css">
-
     <link href="{% static "cmadvert_files/vendor-b.css" %}" rel="stylesheet" type="text/css">
-
-
-    <link rel="search" href="/opensearch/opensearch.xml" title="Камелот" type="application/opensearchdescription+xml">
-
-</head>
-
-<body>
-
-
-
-    <div style="text-align: center;">
-
-        <div id="header-tmp" class="fixedDiv noprint">
-            <style type="text/css">
-                .show-password-link
-                {
-                    display: block;
-                    height: 19px;
-                    outline: none;
-                    position: absolute;
-                    right: 0 !important;
-                    top: 0 !important;
-                    width: 19px;
-                    /*z-index:11;*/
-                }
-
-                .show-password-link-on
-                {
-                    background: url({% static "cmadvert_files/sprite_e.png" %}) no-repeat -18px 50%;
-                }
-
-                .show-password-link-off
-                {
-                    background: url({% static "cmadvert_files/sprite_e.png" %}) no-repeat 0 50%;
-                }
-
-                .password-showing
-                {
-                    background: none;
-                    border: none;
-                    height: 16px;
-                    line-height: 16px;
-                    position: absolute;
-                    width: 190px;
-                    z-index: 1010;
-                }
-            </style>
-
-
-
-
-        </div>
-
-        <div id="searchbar" class="noprint">
-            <div class="search-block-wrapper userstyle_search-block-wrapper search-block-default">
-                <form name="PAdsForm" id="filtersForm" method="get" action="https://www.cmlt.ru/ads">
-                    <div class="fixedDiv search-block-panel">
-                        <div class="search-block-cmlt-logo" style="position: absolute; top: 0; left: -10px;">
-                            <a class="search-block-home-link-img" href="https://www.cmlt.ru/" title="На главную"></a>
-                            <a class="search-block-home-link-txt" href="https://www.cmlt.ru/" title="На главную"></a>
-                            <a class="search-block-part-link" href="https://www.cmlt.ru/ads">объявления</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div style="position: relative">
-            <div id="content" class="fixedDiv userstyle_main_content">
-
-
-                <table id="MainTable">
-                    <tr>
-                        <td id="MainInfoText">
-                            <div id="MainContentTable" class="main">
-                                <style type="text/css">
-                                    #rubricator
-                                    {
-                                        margin-bottom: 0;
-                                    }
-
-                                    a.header_rubric_link_last
-                                    {
-                                        color: #006699;
-                                        text-decoration: underline;
-                                    }
-
-                                        a.header_rubric_link_last:hover
-                                        {
-                                            color: #0099CC;
-                                        }
-
-                                    #gallery
-                                    {
-                                        margin: 15px 20px 18px 17px;
-                                    }
-
-                                    div#gallery-content
-                                    {
-                                        margin-top: 3px;
-                                        text-align: center;
-                                    }
-
-                                    div#gallery-desc
-                                    {
-                                        padding: 5px 10px 0 83px;
-                                    }
-
-                                    .flexslider:hover .flex-prev
-                                    {
-                                        left: 5px !important;
-                                    }
-
-                                    .flexslider:hover .flex-next
-                                    {
-                                        right: 5px !important;
-                                    }
-
-                                    a.toggle_map_link
-                                    {
-                                        background: none;
-                                        padding-right: 0;
-                                    }
-
-                                    .userstyle_share_icons, .userstyle_share_icons a
-                                    {
-                                        margin-right: 8px;
-                                    }
-                                </style>
-
-
-                                <table class="full-an-header">
-                                    <tr>
-                                        <td>
-                                            <h1>{{ name }}</h1>
-                                        </td>
-                                        <td>
-                                            <table>
-                                                <tr class="fullAn-price">
+    <div style="position: relative">
+        <div id="content" class="fixedDiv userstyle_main_content">
+            <table id="MainTable">
+                <tr>
+                    <td id="MainInfoText">
+                        <div id="MainContentTable" class="main">
+                            <style type="text/css">
+                                #rubricator
+                                {
+                                    margin-bottom: 0;
+                                }
+                                a.header_rubric_link_last
+                                {
+                                    color: #006699;
+                                    text-decoration: underline;
+                                }
+                                a.header_rubric_link_last:hover
+                                {
+                                    color: #0099CC;
+                                }
+                                #gallery
+                                {
+                                    margin: 15px 20px 18px 17px;
+                                }
+                                div#gallery-content
+                                {
+                                    margin-top: 3px;
+                                    text-align: center;
+                                }
+                                div#gallery-desc
+                                {
+                                    padding: 5px 10px 0 83px;
+                                }
+                                .flexslider:hover .flex-prev
+                                {
+                                    left: 5px !important;
+                                }
+                                .flexslider:hover .flex-next
+                                {
+                                    right: 5px !important;
+                                }
+                                a.toggle_map_link
+                                {
+                                    background: none;
+                                    padding-right: 0;
+                                }
+                                .userstyle_share_icons, .userstyle_share_icons a
+                                {
+                                    margin-right: 8px;
+                                }
+                            </style>
+                            <table class="full-an-header">
+                                <tr>
+                                    <td>
+                                        <h1>{{ name }}</h1>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr class="fullAn-price">
+                                                <td>
+                                                    <div class>
+                                                        {{ price }} руб.
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="fullAn-and-contacts">
+                                <div class="full-an-info">
+                                    <div class="fullAn">
+                                        <div id="gallery">
+                                            <table style="border-spacing: 0;">
+                                                <tr>
                                                     <td>
-                                                        <div class>
-                                                            {{ price }} руб.
+                                                        <div id="gallery-thumbs">
+                                                            <ul>
+                                                                <li id="f_a_image_2023491" data-index="0">
+                                                                       <a class="image selected userstyle_gallery_thumbs_link userstyle_gallery_thumbs_link_selected" href="/">
+                                                                <img class="userstyle_gallery_thumbs_img" src="{{ image }}" width="90%" alt="{{ name }}">
+                                                                </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div id="gallery-content">
+                                                            <img class="userstyle_gallery_img" src="{{ image }}" alt="{{ name }}" width="90%" height="90%">
+                                                            <script type="text/javascript">
+                                                                $(function () {
+                                                                    $('#gallery-thumbs a.image, a.text, a.video, a.audio').on('click', function (e) {
+                                                                        e.preventDefault();
+                                                                    });
+                                                                });
+                                                            </script>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             </table>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <div class="fullAn-and-contacts">
-                                    <div class="full-an-info">
-                                        <div class="fullAn">
-                                            <div id="gallery">
-                                                <table style="border-spacing: 0;">
-                                                    <tr>
-                                                        <td>
-                                                            <div id="gallery-thumbs">
-                                                                <ul>
-                                                                    <li id="f_a_image_2023491" data-index="0">
-                                                                        <a class="image selected userstyle_gallery_thumbs_link userstyle_gallery_thumbs_link_selected" href="https://files.cmlt.ru/getUserImage?id=5955251">
-                                                                            <img class="userstyle_gallery_thumbs_img" src="{{ image }}" width="90%" alt="{{ name }}">
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div id="gallery-content">
-                                                                <img class="userstyle_gallery_img" src="{{ image }}" alt="{{ name }}" width="90%" height="90%">
-                                                                <script type="text/javascript">
-                                                                    $(function () {
-                                                                        $('#gallery-thumbs a.image, a.text, a.video, a.audio').on('click', function (e) {
-                                                                            e.preventDefault();
-                                                                        });
-                                                                    });
-</script>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div id="gallery-desc"></div>
+                                            <div id="gallery-desc"></div>
+                                        </div>
+                                        <div class="location-block">
+                                            <div class="location">
+                                                <div class="an_property_generic_list">Расположение:</div>
+                                                <div class="an_property_value">
+                                                    {{ address }}
+                                                </div>
                                             </div>
-                                            <div class="location-block">
-                                                <div class="location">
-                                                    <div class="an_property_generic_list">Расположение:</div>
-                                                    <div class="an_property_value">
-                                                        {{ address }}
+                                        </div>
+                                        <div class="properties-block">
+                                            <table style="border-spacing: 0; width: auto;">
+                                                <td class="an_property_generic_full_td">Цена:&nbsp;</td>
+                                                <td style="padding-right: 30px;">{{ price }} руб.</td>
+                                                <td colspan="2"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div class="view-an">
+                                            {{ text }}
+                                        </div>
+                                        <div style="margin-left: 20px; margin-bottom: 20px;">
+                                            {{ date }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if auth %}
+                                <div id="send_to_author">
+                                    <div class="send-to-author-box">
+                                        <div class="send_to_author_block">
+                                            <div>
+                                                <span style="color: gray;">Номер телефона:</span>
+                                            </div>
+                                            <div class="contacts">
+                                                <div class="an-contacts">
+                                                    <div class="contact">
+                                                        <div class="contact-text">
+                                                            TODO \{{ PHONE }}
+                                                        </div>
+                                                        <span class="comment"></span>
                                                     </div>
                                                 </div>
-
-
                                             </div>
 
-                                            <div class="properties-block">
-                                                <table style="border-spacing: 0; width: auto;">
-                            <td class="an_property_generic_full_td">Цена:&nbsp;</td>
-                        <td style="padding-right: 30px;">{{ price }} руб.</td>
-                        <td colspan="2"></td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="view-an">
-
-                {{ text }}
-            </div>
-
-            <div style="margin-left: 20px; margin-bottom: 20px;">
-                {{ date }}
-            </div>
-
-        </div>
-    </div>
-
-    <div id="send_to_author">
-        <div class="send-to-author-box">
-            <div class="send_to_author_block">
-                <div>
-                    <span style="color: gray;">Частное лицо</span>
+                                        </div>
                                     </div>
-                <div class="contacts">
-                    <div class="an-contacts">
-                        <div class="contact">
-                            <div class="contact-text">
-                                TODO \{{ PHONE }}
+                                </div>
+                                {% endif %}
                             </div>
-                            <span class="comment"></span>
                         </div>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('.hint-link').click(showHint);
-                    });
-</script>
-            </div>
-
-
-
-
-        </div>
-
-        <div class="send-to-author-box">
-            <div class="send_to_author_block" style="margin-top: 20px;">
-                <div>
-                    <span style="color: gray;">Постоянная ссылка</span>
-                    <a class="qr-link share-qr-code" href="https://www.cmlt.ru/qrcode?val=www.cmlt.ru/ad-b3022073" onclick="showBox([{&quot;pathToImage&quot;:  this.href, &quot;htmlSignature&quot;: &quot;QR-код — двумерный штрих-код, в котором зашифрована информация (контакт, телефон, ссылка и т. д.). Для обработки такого штрих-кода с помощью телефона потребуется встроенная камера и программа-распознаватель QR-кодов.&quot;, &quot;textSignature&quot;: &quot;&quot;}],0); return false;"></a>
-                </div>
-                <a href="http://www.cmlt.ru/ad-b3022073">www.cmlt.ru/ad-b3022073</a>
-            </div>
-
-            <div class="send_to_author_block" style="padding-bottom: 20px;">
-
-
-            </div>
-            <div id="claimBlock" class="send-to-author-link">
-                <a href="https://www.cmlt.ru/login?origURL=%2fad-b3022073%3fshowClaim%3d1" data-event-type="click" data-ga-category="Пожаловаться" data-ga-action="Страница объявления - Открыть" data-ga-label="3 - 25 - 233 - 236 - b3022073">Пожаловаться</a>
-                <div id="anClaim" style="display: none;">
-                    <h3></h3>
-                </div>
-            </div>
-            <script type="text/javascript">
-
-                function showAddAttr(selClaimType, addBlock) {
-                    var divAddBlock = document.getElementById(addBlock);
-                    while (divAddBlock.childElementCount > 0) {
-                        divAddBlock.removeChild(divAddBlock.children[0]);
-                    }
-                    var claimType = selClaimType.value;
-                    var claimAddAttribute = [{ "claimType": "9", "claimHint": ["Опишите подробно причину обращения"], "claimAddAttributes": [] }];
-                    if (hintsHelp['field_txtarea'] != 'undefined')
-                        delete hintsHelp['field_txtarea'];
-                    if (claimAddAttribute != null && claimAddAttribute.length > 0) {
-                        for (var i = 0; i < claimAddAttribute.length; i++) {
-                            if (claimAddAttribute[i].claimType == claimType) {
-                                if (claimAddAttribute[i].claimHint != null && claimAddAttribute[i].claimHint.length > 0) {
-                                    var hintHelp = '' +
-                                    '' +
-                                    '<ul class="hintHelp">';
-                                    for (l = 0; l < claimAddAttribute[i].claimHint.length; l++) {
-                                        hintHelp = hintHelp + '<li>';
-                                        hintHelp = hintHelp + claimAddAttribute[i].claimHint[l];
-                                        hintHelp = hintHelp + '</li>';
-                                    }
-
-                                    hintHelp = hintHelp + '</ul>' +
-                                    ' ';
-                                    hintsHelp['field_txtarea'] = hintHelp;
-                                    hintsHelp['field_txtarea_hint-align'] = "left";
-                                }
-                                if (claimAddAttribute[i].claimAddAttributes != null && claimAddAttribute[i].claimAddAttributes.length > 0) {
-                                    var arrayAttr = claimAddAttribute[i].claimAddAttributes;
-                                    for (j = 0; j < arrayAttr.length; j++) {
-                                        createSpan(divAddBlock, arrayAttr[j].name, "color:gray;", null, arrayAttr[j].mandatory);
-                                        createInput('idAddAttribute[]', arrayAttr[j].id, divAddBlock, true, "field");
-                                        createInput('valueAddAttribute[]', '', divAddBlock, false, "field");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                function createInput(nameInput, valueInput, div, isHidden, nameClass) {
-                    var newInput = document.createElement("input");
-                    newInput.type = "input";
-                    if (isHidden) {
-                        newInput.setAttribute("type", "hidden");
-                    }
-                    newInput.setAttribute("name", nameInput);
-                    newInput.setAttribute("value", valueInput);
-                    newInput.setAttribute("class", nameClass);
-                    div.appendChild(newInput);
-
-                }
-
-                function createSpan(div, valueSpan, style, nameClass, mandatory) {
-                    var newSpan = document.createElement("span");
-                    newSpan.type = "span";
-                    newSpan.textContent = valueSpan;
-                    if (nameClass != null) {
-                        newSpan.setAttribute("style", style);
-                    }
-                    if (nameClass != null) {
-                        newSpan.setAttribute("class", nameClass);
-                    }
-                    if (mandatory) {
-                        createSpan(newSpan, "*", null, "star", false)
-                    }
-                    div.appendChild(newSpan);
-                }
-
-                function showFileDeleteBut(fieldFile, butDelete) {
-                    if (document.getElementById(fieldFile) != null) {
-                        if (document.getElementById(fieldFile).value != null && document.getElementById(fieldFile).value.length == 0) {
-                            document.getElementById(butDelete).hidden = true;
-                        } else {
-                            document.getElementById(butDelete).hidden = false;
-                        }
-                    }
-
-                }
-                $(document).ready(function () {
-
-                    showFileDeleteBut('butAttachment', 'file_delete');
-                    if ($("#pTypeClaim").val()) {
-                        showAddAttr(document.getElementById("pTypeClaim"), 'claimAddBlock');
-                    }
-                    $(':input.hint-link').focus(showHint);
-
-                });
-</script>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#notepad_name_input').keypress(function (ev) {
-                if (ev.which === 13)
-                    $('#notepad_name_input_yes_button').click();
-            });
-            $("#anClaim").on("changeVisible", function (event, elem) {
-                if ($("#anClaim").is(":visible")) {
-                    $('#claimBlockClose').hide();
-                    $("#anClaim").hide();
-                }
-                else {
-                    elementTrackEvent(elem);
-                    $('#claimBlockClose').show();
-                    $("#anClaim").show();
-                }
-            });
-
-            $("#sendToAuthorForm").on("changeVisible", function (event, elem) {
-                if ($("#sendToAuthorForm").is(":visible")) {
-                    $('#sendToAuthorClose').hide();
-                    $("#sendToAuthorForm").hide();
-                }
-                else {
-                    elementTrackEvent(elem);
-                    $('#sendToAuthorClose').show();
-                    $("#sendToAuthorForm").show();
-                }
-            });
-
-        });
-</script>
-
-    <div id="ya_direct"></div>
-    <style type="text/css">
-        #litebox_navigation .context-ad-head-link:hover
-        {
-            text-decoration: none !important;
-        }
-
-        #litebox_navigation .context-ad-host-link:hover
-        {
-            text-decoration: none !important;
-        }
-
-        .context-main-div
-        {
-            clear: both !important;
-            padding-top: 20px !important;
-        }
-
-        #camelot-container
-        {
-            width: auto !important;
-        }
-
-        .context-block
-        {
-            background-color: transparent !important;
-        }
-
-        .context-ad-block
-        {
-            border-top: none !important;
-            float: left !important;
-            padding: 0 0 0 10px !important;
-        }
-
-        .context-ad
-        {
-            color: #000000 !important;
-            font-size: 12px !important;
-            line-height: 16px !important;
-        }
-
-        .context-ad-blur
-        {
-            background: transparent url(cmadvert_files/gradienv.png) repeat-y scroll 0 0 !important;
-            display: inline-block !important;
-            left: -23px !important;
-            position: relative !important;
-            width: 24px !important;
-        }
-
-        .context-ad-more
-        {
-            right: 0 !important;
-        }
-    </style>
-
-    <div class="context-main-div">
-        <div id="camelot-container"></div>
-    </div>
-    </div>
-</td>
-</tr>
-</table>
-</div>
-    <div class="content-placeholder" style="display: none; text-align: center">
-        <img class="content-placeholder-loader hidden" style="margin: 100px auto;" src="cmadvert_files/loader00.gif">
-    </div>
-
-
-    <div class="fixedDiv noprint" style="margin: 20px auto;">
-
-        <span class="footertext">© 2004—2014&nbsp;<a class="footertext" href="https://www.cmlt.ru/" title="Камелот">Камелот</a></span>
-
-    </div>
-
-
-    </div>
-
-</div>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            showMsgDialog("errorBlock");
-            showMsgDialog("correctBlock");
-            showMsgDialog("messages");
-            showMsgDialog("messages.errors");
-
-            $('.autocomplete_off').attr("autocomplete", "off");
-
-            // "пинг" сайта для продления жизни сессии
-            setInterval(function () {
-                $.post("/ping");
-            }, 1000 * 60 * 5);
-
-            $.each($('[data-ga-action]'), function (index, elem) {
-                $(elem).on($(elem).attr("data-event-type"), function (e) {
-                    elementTrackEvent($(elem))
-                });
-            });
-
-            $.ajaxSetup({ cache: false });
-        });
-</script>
-    <script type="text/javascript" src="cmadvert_files/cmlt-buo.js"></script>
-
-    <script type="text/javascript" src="cmadvert_files/vendor-c.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(':password').showPassword({
-                linkText: '',
-                showPasswordLinkText: ''
-            });
-            $('.show-password-link')
-            .addClass('show-password-link-on')
-            .attr('style', '')
-            .click(function () {
-                if ($(this).is('.show-password-link-on')) {
-                    $(this).removeClass('show-password-link-on').addClass('show-password-link-off');
-                }
-                else {
-                    $(this).removeClass('show-password-link-off').addClass('show-password-link-on');
-                }
-            });
-        });
-</script>
-    <script type="text/javascript">
-        function showLocationValue() {
-            var regionSelected = $('[name="goodsReg"]').find('option:selected');
-            var localitySelected = $('[name="locality"]').find('option:selected');
-            var region = regionSelected.is(':first-child') ? '' : regionSelected.text().trim();
-            var locality = localitySelected.is(':first-child') ? '' : localitySelected.text().trim();
-            var defaultVal = 'Все регионы';
-            $('span.ads-filters-selected-location').text(locality ? locality : (region ? region : defaultVal));
-        }
-
-        showLocationValue();
-</script>
-    <script type="text/javascript" src="cmadvert_files/search-b.js"></script>
-    <script type="text/javascript">
-
-        $(function () {
-            var pageScope = null;
-            try {
-                pageScope = JSON.parse('{"pageScope":{"contentPlaceholderSelector":"#content + .content-placeholder","dinamycAdsLoading":false,"searchBlock":{"filtersManager":{"isAdsRubric":true,"adsCount":0,"ajaxParams":{"apiVersion":"2.0.0"},"dependencies":[{"propertyCode":"model","mainPropertyCode":"mark"},{"propertyCode":"pub","mainPropertyCode":"source","mainPropertyValues":["paper"]},{"propertyCode":"period","mainPropertyCode":"source","mainPropertyValues":["site","all"]}],"withoutFiltersPanel":true,"locationManager":{"ajaxParams":{"apiVersion":"2.0.0","rubric":-1}}},"searchAreaManager":{"rubricId":-1,"selectedValue":"/ads"},"savedFiltersManager":{"ajaxParams":{"rubricId":-1,"device":"desktop"},"id":-1,"defaultValue":"Все рубрики"},"tagsPanel":{"additionalTags":[],"customValues":{}},"rubricsStyles":{"9":{"styleClass":"search-block-realty","linkText":"недвижимость","linkPath":"/realty"},"10":{"styleClass":"search-block-job","linkText":"работа","linkPath":"/job"},"7":{"styleClass":"search-block-auto","linkText":"авто","linkPath":"/auto"},"default":{"styleClass":"search-block-default","linkText":"объявления","linkPath":"/ads"}}}}}');
-            } catch (exception) {
-                ru.cmlt.utils.Common.logEvent({
-                    packageName: '/config/tags/paladin/searchBlock.tag',
-                    functionName: '$(document).ready',
-                    exception: exception
-                });
-            }
-            new ru.cmlt.pages.Ans(pageScope.pageScope).initialize();
-        });
-</script>
-    <script type="text/javascript">
-        (function (w, d, n, s, t) {
-            w[n] = w[n] || [];
-            w[n].push(function () {
-                Ya.Direct.insertInto(38985, "ya_direct", {
-                    stat_id: 3,
-                    site_charset: "UTF-8",
-                    ad_format: "direct",
-                    font_size: 0.9,
-                    type: "horizontal",
-                    border_type: "ad",
-                    limit: 2,
-                    title_font_size: 3,
-                    site_bg_color: "FFFFFF",
-                    header_bg_color: "CCCCCC",
-                    bg_start_color: "FFFFFF",
-                    border_color: "CCCCCC",
-                    title_color: "666666",
-                    url_color: "666666",
-                    all_color: "000000",
-                    text_color: "000000",
-                    hover_color: "CCCCCC"
-                });
-            });
-            t = d.documentElement.firstChild;
-            s = d.createElement("script");
-            s.type = "text/javascript";
-            s.src = "//an.yandex.ru/system/context.js";
-            s.setAttribute("async", "true");
-            t.insertBefore(s, t.firstChild);
-        })(window, document, "yandex_context_callbacks");
-</script>
-    <script type="text/javascript">
-        var VISIBLE_LIMIT, FADE_SYMBOLS, WORD_MAXIMIZE, WORD_MINIMIZE, DIV_CONTAINER, AN_PICS_DIV,
-        SEARCH_MASK_INDIVIDUAL_AD_BLOCKS, SEARCH_MASK_MONOLITHIC_AD_BLOCKS;
-
-        function initContextParams() {
-            VISIBLE_LIMIT = 80;
-            FADE_SYMBOLS = 3;
-
-            WORD_MAXIMIZE = "Подробнее";
-            WORD_MINIMIZE = "Свернуть";
-            DIV_CONTAINER = $("#camelot-container");
-            AN_PICS_DIV = $("#right-an-pics");
-            SEARCH_MASK_INDIVIDUAL_AD_BLOCKS = "div[id^=camelot-container-]";
-            SEARCH_MASK_MONOLITHIC_AD_BLOCKS = "div.context-ad-block";
-        }
-
-        initContextParams();
-
-        function applyContextAdvertise() {
-            if (AN_PICS_DIV.length) {
-                AN_PICS_DIV.find(SEARCH_MASK_INDIVIDUAL_AD_BLOCKS).not(":empty").show('fast', function () {
-                    showHideContextAd($(this).find("div.context-ad-text"), $(this));
-                });
-            } else if (DIV_CONTAINER.length) {
-                var mask = DIV_CONTAINER.find(SEARCH_MASK_INDIVIDUAL_AD_BLOCKS).length ?
-                    SEARCH_MASK_INDIVIDUAL_AD_BLOCKS : SEARCH_MASK_MONOLITHIC_AD_BLOCKS;
-
-                DIV_CONTAINER.find(mask).not(":empty").show("fast", function () {
-                    showHideContextAd($(this).find("div.context-ad-text"), $(this));
-                });
-            }
-        }
-
-        function showHideContextAd(ad, container) {
-            // Remember Original DOM for LightBox
-            container.find(".context-ad-image").data("original-dom", container.find(".context-ad").html());
-            // DATA for LightBox
-            container.find('.context-ad-image').click(function () {
-                var obj = $('a', this);
-                var adUrl = obj.attr("data-ad-url");
-
-                var adContent = $(this).data("original-dom");
-                var htmlSignature = (adUrl != null && adUrl != '') ? "<a class='context-ad' href='" + adUrl +
-                "'target='_blank'>" + adContent + "</a>" : adContent;
-                var clientImages = [
-                {
-                    "htmlSignature": htmlSignature,
-                    "pathToImage": obj.attr("data-path-to-image"),
-                    "textSignature": obj.attr("data-big-img-alt")
-                }
-                ];
-                showBox(clientImages, 0);
-
-                return false;
-            });
-
-            var text = ad.text();
-            if (text.length <= VISIBLE_LIMIT) return;
-            var hLarge = ad.height(); // высота полного текста
-            var visibleText = text.substr(0, VISIBLE_LIMIT);
-            var blur = "<span style='white-space:nowrap;'>" + text.substr(VISIBLE_LIMIT, FADE_SYMBOLS)
-            + "&nbsp;<span class='context-ad-blur'>&nbsp;</span></span>";
-            ad.text(visibleText).append(blur);
-            var hSmall = ad.height(); // высота видимой части текста
-            if (hSmall == hLarge) {
-                ad.text(text);
-                return
-            }
-
-            ad.append("<div class='context-ad-more' style='display:none;'>" + WORD_MAXIMIZE + "</div>");
-            ad.append("<div class='context-ad-short' style='display:none;'>" + WORD_MINIMIZE + "</div>");
-
-            container.find("div.context-ad-more").live("click", function () {
-                ad.text(text).append("<div style='text-align:right;'><span class='context-ad-short' style='display:none;'>" + WORD_MINIMIZE + "</span></div>");
-                container.find("div.context-ad-text span.context-ad-short").show(0);
-            });
-
-            container.find("span.context-ad-short").live("click", function () {
-                ad.text(visibleText).append(blur).append("<div class='context-ad-more' style='display:none;'>" + WORD_MAXIMIZE + "</div>");
-            });
-
-            container.bind("mouseover", function () {
-                $(this).find("div.context-ad-text div.context-ad-more").show();
-            });
-
-            container.bind("mouseleave", function () {
-                $(this).find("div.context-ad-text div.context-ad-more").hide();
-            });
-        }
-</script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.getScript("//kk.cmlt.ru/get-block?regionId=1&contextTopic=319798&container=camelot-container&page=&choke=true&bonus=false&type=horizontal-multipleColumns", function () {
-                var count = show_block();
-                if (count > 0) {
-                    $('.context-main-div').css('display', 'block');
-                    var width = 935 / count - 11;
-
-                    $(".context-ad-block").css("width", width + "px");
-                }
-                applyContextAdvertise();
-            });
-        });
-</script>
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function (d, w, c) {
-            (w[c] = w[c] || []).push(function () {
-                try {
-                    w.yaCounter15239674 = new Ya.Metrika({
-                        id: 15239674,
-                        clickmap: true,
-                        trackLinks: true,
-                        accurateTrackBounce: true
-                    });
-                } catch (e) { }
-            });
-
-            var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else { f(); }
-        })(document, window, "yandex_metrika_callbacks");
-</script>
-    <noscript>
-        <div>
-            <img src="//mc.yandex.ru/watch/15239674" style="position: absolute; left: -9999px;" alt>
-        </div>
-    </noscript>
-    <!-- /Yandex.Metrika counter -->
-</body>
-</html>
-
-<!-- This document saved from https://www.cmlt.ru/ad-b3022073 -->
+{% endblock %}

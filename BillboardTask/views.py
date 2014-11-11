@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
@@ -28,7 +29,9 @@ def register(request):
             passw = request.POST.get("password")
             e_mail = request.POST.get("email")
             if not User.objects.filter(username=log).exists():
-                user = User.objects.create_user(username=log, password=passw, email=e_mail)
+                User.objects.create_user(username=log, password=passw, email=e_mail)
+                user = authenticate(username=log, password=passw)
+                login(request, user)
                 return HttpResponse('Success ' + str(user))
             else:
                 return HttpResponse('Nickname already used ' + str(log))
@@ -46,7 +49,7 @@ def login_view(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse('Success ' + str(user))
+                    return HttpResponseRedirect("/")
                 else:
                     return HttpResponse('Disabled user ' + str(user))
             else:

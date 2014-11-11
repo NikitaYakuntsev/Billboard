@@ -1,194 +1,26 @@
-
-
-
-<!DOCTYPE html>
-<html class="no-js">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<head>
-    {% load staticfiles %}
-    <meta charset="utf-8">
-    <meta name="format-detection" content="telephone=no">
-    <title>Доска бесплатных объявлений</title>
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/bb60b15e.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/f094029a.css" %}">
-    <link rel="apple-touch-icon" sizes="57x57" href="//www.avito.st/s/common/favicon/apple-touch-icon-57x57.png?22c6730">
-    <link rel="apple-touch-icon" sizes="60x60" href="//www.avito.st/s/common/favicon/apple-touch-icon-60x60.png?012e182">
-    <link rel="apple-touch-icon" sizes="72x72" href="//www.avito.st/s/common/favicon/apple-touch-icon-72x72.png?efb750a">
-    <link rel="apple-touch-icon" sizes="76x76" href="//www.avito.st/s/common/favicon/apple-touch-icon-76x76.png?57695cd">
-    <link rel="apple-touch-icon" sizes="114x114" href="//www.avito.st/s/common/favicon/apple-touch-icon-114x114.png?950acfd">
-    <link rel="apple-touch-icon" sizes="120x120" href="//www.avito.st/s/common/favicon/apple-touch-icon-120x120.png?2c449a5">
-    <link rel="apple-touch-icon" sizes="144x144" href="//www.avito.st/s/common/favicon/apple-touch-icon-144x144.png?022a320">
-    <link rel="apple-touch-icon" sizes="152x152" href="//www.avito.st/s/common/favicon/apple-touch-icon-152x152.png?9fe05a2">
-    <meta name="msapplication-TileColor" content="#000000">
-    <meta name="msapplication-TileImage" content="/s/common/favicon/mstile-144x144.png">
-    <meta name="msapplication-config" content="browserconfig.xml">
-    <link href="main_files/favicon0.htm" rel="shortcut icon" type="image/x-icon">
-    <link href="//www.avito.st/ya-tableau-manifest-ru.json?cacc83f" rel="yandex-tableau-widget">
-    <link href="//www.avito.st/open_search_ru.xml?c968cd1" rel="search" type="application/opensearchdescription+xml" title="Avito">
-    <link rel="canonical" href="//www.avito.ru/moskva">
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/7cdd8ecc.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/4183c2ef.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/1291242a.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/0285a80a.css" %}">
-    <link rel="stylesheet" type="text/css" href="{% static "main_files/05f03db7.css"%}">
-    <script>var DC_BackgroundImageUrl = "", DC_BackgroundImageIndex = 0; DC_startBackgroundImage = function () { var e = parent.document.all ? !0 : !1; document.addEventListener && 0 == e ? parent.document.addEventListener("click", DC_callback, !1) : attachEvent("onclick", DC_callback), e && (parent.document.onmousedown = DC_callback) }, DC_callback = function (e) { var n = e || window.event, a = parent.document.all ? !0 : !1, t = parent.document.body.clientWidth; a ? (tempX = n.clientX + document.body.scrollLeft, tempY = n.clientY + document.body.scrollTop) : (tempX = e.pageX, tempY = e.pageY); var c = t / 2 - 500, d = t / 2 + 500; c > tempX || tempX > d ? 1 == DC_BackgroundImageIndex ? DC_BackgroundImageIndex = 0 : DC_BackgroundImageUrl.indexOf("http") >= 0 && (myWindow = window.open(DC_BackgroundImageUrl, "")) : DC_BackgroundImageIndex = 1 };</script>
-</head>
-<body class="RU windows win7 opera " id="catalog">
-
-
-    <div class="b-header">
-        <div class="header-service">
-            <div class="header-service__inner clearfix">
-                <div class="header__profile ">
-                    <div class="header__profile-enter">
-                        {% if not auth %}
-                        <a class="header__profile-enter__link " href="{% url 'Registration' %}">
-                            <i class="i i-profile"></i><span class="fader">Register</span> </a>
-                        <a class="header__profile-enter__link " href="{% url 'Login' %}">
-                            <i class="i i-profile"></i><span class="fader">Login</span> </a>
-                        {% else %}
-                        <a class="header__profile-enter__link " href="{% url 'Logout' %}">
-                            <i class="i i-profile"></i><span class="fader">Logout</span> </a>
-                        {% endif %}
-                    </div>
-
-                </div>
-
+{% extends 'index.html' %}
+{% block main_column %}
+    {% for adv in advert_list %}
+        <!--single advert-->
+        <div class="item item_table clearfix j-catalog-item-enum c-b-0" id="i457724520" data-type="1">
+            <div class="b-photo">
+                <a class="photo-wrapper" href="{% url 'Advert.id' catname adv.id %}" title="{{ adv.title }}">
+                    <img src="{{ adv.image }}" class="photo-count-show" width="90%" alt="{{ adv.title }}">
+                </a>
             </div>
-        </div>
-        <div class="header-basic j-header-2">
-            <div class="header-basic__inner clearfix">
-
-                <div class="header__logo">
-                    <span class="b-logo"><span class="b-logo__img"></span>
-                        <a class="b-logo__link" href="{% url 'Main' %}" title="Avito — сайт бесплатных объявлений"></a>
-                    </span>
+            <div class="description">
+                <h3 class="title"><a href="{% url 'Advert.id' catname adv.id %}" title="{{ adv.title }}">{{ adv.title }}</a> </h3>
+                <div class="about">
+                    {{ adv.price }} руб.
                 </div>
-                <div class="header__add-item">
-                    <a href="https://www.avito.ru/additem" class="btn-plain btn-plain_blue">Make an advert</a>
+                <div class="data">
+                    <div class="date">
+                        {{ adv.date }}
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-
-    <div class="j-page layout-internal col-12 j-autosuggest__search-list-container">
-        <div class="l-content">
-
-
-
-
-            <div class="clearfix">
-                <div class="catalog catalog_table">
-                    <div class="catalog-filters clearfix">
-
-
-
-                    </div>
-                    <div class="catalog-list catalog-list_table clearfix">
-                        <div class="j-catalog_before-ads">
-
-
-                            <hr>
-                            {% for adv in advert_list %}
-                            <!--single advert-->
-                            <div class="item item_table clearfix j-catalog-item-enum c-b-0" id="i457724520" data-type="1">
-
-                                <div class="b-photo">
-                                    <a class="photo-wrapper" href="{% url 'Advert.id' catname adv.id %}" title="{{ adv.title }}">
-                                        <img src="{{ adv.image }}" class="photo-count-show" width="90%" alt="{{ adv.title }}">
-
-                                    </a>
-
-                                </div>
-
-                                <div class="description">
-                                    <h3 class="title"><a href="{% url 'Advert.id' catname adv.id %}" title="{{ adv.title }}">{{ adv.title }}</a> </h3>
-                                    <div class="about">
-                                        {{ adv.price }} руб.
-                                    </div>
-
-                                    <div class="data">
-
-
-                                        <div class="date">
-                                            {{ adv.date }}
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                                <hr>
-                            {% endfor %}
-
-
-
-
-                        </div>
-                    </div>
-<!--
-                    <div class="pagination j-pages">
-                        <div class="pagination__nav clearfix">
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=2">Следующая страница →
- </a>
-                        </div>
-                        <div class="pagination__pages clearfix">
-                            <span class="pagination__page pagination__page_current">1</span>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=2">2</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=3">3</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=4">4</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=5">5</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=6">6</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=7">7</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=8">8</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=9">9</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=10">10</a>
-                            <a class="pagination__page" href="https://www.avito.ru/moskva?p=109350">Последняя</a>
-
-                        </div>
-                    </div>
--->
-                </div>
-                <div class="catalog-promo">
-
-
-                    <noindex> <div class="catalog-social"> <div class="social-logo">
-  <span class="b-logo"> <span class="b-logo__img">Avito</span>
-  </span>
- в социальных сетях
- </div> <div class="social-icons">
-  <a class="social-icon icon-vk" href="https://www.avito.ru/jump/s?to=http%3A%2F%2Fwww.vkontakte.ru%2Fclub5755934" target="_blank" title="Клуб Avito ВКонтакте" rel="nofollow">В</a> <a class="social-icon icon-ok" href="https://www.avito.ru/jump/s?to=http%3A%2F%2Fwww.odnoklassniki.ru%2Favitoru" target="_blank" title="Avito в Одноклассниках" rel="nofollow">ОК</a> <a class="social-icon icon-fb" href="https://www.avito.ru/jump/s?to=http%3A%2F%2Fwww.facebook.com%2Favito.ru" target="_blank" title="Avito в Facebook" rel="nofollow">F</a> <a class="social-icon icon-tw" href="https://www.avito.ru/jump/s?to=http%3A%2F%2Fwww.twitter.com%2Favito_ru" target="_blank" title="Avito в Twitter" rel="nofollow">T</a> <a class="social-icon icon-gp" href="https://www.avito.ru/jump/s?to=https%3A%2F%2Fplus.google.com%2Fu%2F0%2Fb%2F106768083601517627858%2F%2Bavitoru%2Fposts" target="_blank" title="Avito в Google+" rel="nofollow">G+</a> <a class="social-icon icon-lj" href="https://www.avito.ru/jump/s?to=http%3A%2F%2Favito-news.livejournal.com" target="_blank" title="Блог Avito в Livejournal" rel="nofollow">LJ</a> <a class="social-icon icon-in" href="https://www.avito.ru/jump/s?to=http%3A%2F%2Finstagram.com%2Favitoru" target="_blank" title="Avito в Instagram" rel="nofollow">Ins</a>
-  </div> </div> </noindex>
-
-
-
-                </div>
-
-            </div>
-
-
-
-        </div>
-
-        <div class="l-footer">
-
-            <div class="about c-2">
-                ©&nbsp;Авито&nbsp;—&nbsp;<a href="https://www.avito.ru/moskva">сайт бесплатных объявлений Москвы</a>. Использование сайта, в том числе подача объявлений, означает согласие с
-
-                <a href="https://www.avito.ru/info/polzovatelskoe_soglashenie">пользовательским соглашением</a>.
-
-                <br>
-                Оплачивая услуги на сайте, Вы принимаете <a href="https://www.avito.ru/info/oferta">оферту</a>.
-
-                <a href="https://www.avito.ru/help/tech_browser">Информация&nbsp;о&nbsp;cookies</a>
-            </div>
-
-        </div>
-
-</body>
-</html>
-
-<!-- This document saved from https://www.avito.ru/moskva -->
+        <hr>
+    {% endfor %}
+{% endblock %}
