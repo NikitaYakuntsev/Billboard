@@ -21,10 +21,11 @@ class Advert(models.Model):
     price = models.IntegerField()
     date = models.DateField()
     address = models.TextField(max_length=300)
-    categories = models.ManyToManyField('Category')#, through='CategoryAndAdvert')
+    #phone = models.CharField(max_length=11)
+    categories = models.ManyToManyField('Category')
     image = models.TextField(max_length=300)
     def __unicode__(self):
-        return str(self.id) + ". " + str(self.title)
+        return '%s. %s' % (self.id, self.title)
 
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
@@ -41,7 +42,7 @@ class RegistrationForm(ModelForm):
     def clean(self):
         super(ModelForm, self).clean()
         mail = self.cleaned_data.get("email")
-        if mail is None or mail == "":
+        if not mail:
             raise forms.ValidationError("Email is empty!")
         return self.cleaned_data
 

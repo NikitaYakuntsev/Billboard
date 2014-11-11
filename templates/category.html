@@ -1,23 +1,4 @@
-<!--
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-{% if advert_list %}
-     <table border="1" style="color:black" align="left">
-    {% for adv in advert_list %}
-        <tr><td><a href="{% url 'Advert.id' catname adv.id %}">{{ adv.title }}</a></td></tr>
-    {% endfor %}
-    </table>
-{% else %}
-    <p>No adverts for this category are available.</p>
-{% endif %}
-</body>
-</html>
--->
+
 
 
 <!DOCTYPE html>
@@ -27,11 +8,8 @@
     {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
-    <title>Доска бесплатных объявлений от частных лиц и компаний в Москве на Avito </title>
-    <meta name="description" content="Бесплатные объявления на Avito - подать бесплатные объявления в Москве">
-    <meta name="yandex-verification" content="51a6d66a02fb23c7">
-    <meta name="yandex-verification" content="6719feb6bc06229e">
-<link rel="stylesheet" type="text/css" href="{% static "main_files/bb60b15e.css" %}">
+    <title>Доска бесплатных объявлений</title>
+    <link rel="stylesheet" type="text/css" href="{% static "main_files/bb60b15e.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "main_files/f094029a.css" %}">
     <link rel="apple-touch-icon" sizes="57x57" href="//www.avito.st/s/common/favicon/apple-touch-icon-57x57.png?22c6730">
     <link rel="apple-touch-icon" sizes="60x60" href="//www.avito.st/s/common/favicon/apple-touch-icon-60x60.png?012e182">
@@ -83,7 +61,7 @@
 
                 <div class="header__logo">
                     <span class="b-logo"><span class="b-logo__img"></span>
-                        <a class="b-logo__link" href="https://www.avito.ru/" title="Avito — сайт бесплатных объявлений"></a>
+                        <a class="b-logo__link" href="{% url 'Main' %}" title="Avito — сайт бесплатных объявлений"></a>
                     </span>
                 </div>
                 <div class="header__add-item">
@@ -143,8 +121,9 @@
 
                                 </div>
                             </div>
+                                <hr>
                             {% endfor %}
-                            <hr>
+
 
 
 
