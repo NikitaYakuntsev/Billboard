@@ -56,6 +56,7 @@ def login_view(request):
                 return HttpResponse('Invaild login ')
     return render(request, 'login.html', {'log_form': log_form})
 
+
 def category_view(request, cname):
     try:
         category = Category.objects.get(name__exact=cname)

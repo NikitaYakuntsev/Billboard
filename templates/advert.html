@@ -129,7 +129,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% if auth %}
+
                                 <div id="send_to_author">
                                     <div class="send-to-author-box">
                                         <div class="send_to_author_block">
@@ -140,7 +140,11 @@
                                                 <div class="an-contacts">
                                                     <div class="contact">
                                                         <div class="contact-text">
+                                                            {% if auth %}
                                                             TODO \{{ PHONE }}
+                                                            {% else %}
+                                                            You must be logged in
+                                                            {% endif %}
                                                         </div>
                                                         <span class="comment"></span>
                                                     </div>
@@ -150,7 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                {% endif %}
+
                             </div>
                         </div>
                     </td>
