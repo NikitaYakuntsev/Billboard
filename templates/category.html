@@ -2,25 +2,27 @@
 {% block main_column %}
     {% for adv in advert_list %}
         <!--single advert-->
+        {% if adv.0 <= 3 %}
         <div class="item item_table clearfix j-catalog-item-enum c-b-0" id="i457724520" data-type="1">
             <div class="b-photo">
-                <a class="photo-wrapper" href="{% url 'Advert.id' catname adv.id %}" title="{{ adv.title }}">
-                    <img src="{{ adv.image }}" class="photo-count-show" width="90%" alt="{{ adv.title }}">
+                <a class="photo-wrapper" href="{% url 'Advert.id' catname adv.1.id %}" title="{{ adv.1.title }}">
+                    <img src="{{ adv.1.image }}" class="photo-count-show" width="90%" alt="{{ adv.1.title }}">
                 </a>
             </div>
             <div class="description">
-                <h3 class="title"><a href="{% url 'Advert.id' catname adv.id %}" title="{{ adv.title }}">{{ adv.title }}</a> </h3>
+                <h3 class="title"><a href="{% url 'Advert.id' catname adv.1.id %}" title="{{ adv.1.title }}">{{ adv.1.title }}</a> </h3>
                 <div class="about">
-                    {{ adv.price }} руб.
+                    {{ adv.1.price }} руб.
                 </div>
                 <div class="data">
                     <div class="date">
-                        {{ adv.date }}
+                        {{ adv.1.date }}
 
                     </div>
                 </div>
             </div>
         </div>
         <hr>
+        {% endif %}
     {% endfor %}
 {% endblock %}

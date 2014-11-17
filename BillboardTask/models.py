@@ -1,8 +1,10 @@
+from django.contrib.admin import widgets
 from django.contrib.auth import authenticate
 from django.db import models
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
+from django.forms.extras.widgets import SelectDateWidget
 
 # Create your models here.
 
@@ -12,7 +14,7 @@ class Report(models.Model):
     text = models.TextField(max_length=300)
     id_advert = models.ForeignKey('Advert')
     def __unicode__(self):
-        return str(id)
+        return str(self.id_advert)
 
 
 class Advert(models.Model):
@@ -22,7 +24,7 @@ class Advert(models.Model):
     price = models.IntegerField()
     date = models.DateField()
     address = models.TextField(max_length=300)
-    #phone = models.CharField(max_length=11)
+    phone = models.CharField(max_length=11)
     categories = models.ManyToManyField('Category')
     image = models.TextField(max_length=300)
     def __unicode__(self):
@@ -43,21 +45,20 @@ class RegistrationForm(forms.Form):
     email = forms.EmailField(max_length=50)
 
     def clean_username(self):
-
-        return self.cleaned_data
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__exact=username).exists():
+            raise forms.ValidationError("User already exists")
+        return self.cleaned_data.get('username')
 
     def clean(self):
-        cleaned_data = super(RegistrationForm, self).clean()
-        if not self.errors:
-            usr = str(self.cleaned_data['username'])
+        #self.cleaned_data = super(RegistrationForm, self).clean()
 
-            if User.objects.filter(username=usr).exists():
-                return forms.ValidationError("Username already exists")
-            pass1 = str(cleaned_data['password1'])
-            pass2 = str(cleaned_data['password2'])
+        if not self.errors:
+            pass1 = str(self.cleaned_data['password1'])
+            pass2 = str(self.cleaned_data['password2'])
             if pass1 != pass2:
-                return forms.ValidationError("Passwords are not equal")
-        return cleaned_data
+                raise forms.ValidationError("Passwords are not equal")
+        return self.cleaned_data
 
 
 class LoginForm(forms.Form):
@@ -79,10 +80,10 @@ class LoginForm(forms.Form):
 
 class AddAdvertForm(forms.Form):
     title = forms.CharField(max_length=50)
-    text = forms.CharField(max_length=1000)
+    text = forms.CharField(max_length=1000, min_length=30)
     price = forms.IntegerField()
-    date = forms.DateField()
+    #date = forms.DateField(widget=SelectDateWidget)
     address = forms.CharField(max_length=300)
     phone = forms.CharField(max_length=11)
-    categories = forms.MultipleChoiceField(choices=Category.objects.all())
+    categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all())
     image = forms.CharField()

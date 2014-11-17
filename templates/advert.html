@@ -82,7 +82,7 @@
                                                         <div id="gallery-thumbs">
                                                             <ul>
                                                                 <li id="f_a_image_2023491" data-index="0">
-                                                                       <a class="image selected userstyle_gallery_thumbs_link userstyle_gallery_thumbs_link_selected" href="/">
+                                                                       <a class="image selected userstyle_gallery_thumbs_link userstyle_gallery_thumbs_link_selected">
                                                                 <img class="userstyle_gallery_thumbs_img" src="{{ image }}" width="90%" alt="{{ name }}">
                                                                 </a>
                                                                 </li>
@@ -141,7 +141,7 @@
                                                     <div class="contact">
                                                         <div class="contact-text">
                                                             {% if auth %}
-                                                            TODO \{{ PHONE }}
+                                                            {{ phone }}
                                                             {% else %}
                                                             You must be logged in
                                                             {% endif %}
@@ -150,6 +150,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        {% if auth %}
+                                        <div id="claimBlock" class="send-to-author-link">
+                                            <form id="my_form" action="abuse/" method="post">
+                                             <span class="tab tab-abuse"><a href="javascript:{}" onclick="document.getElementById('my_form').submit();"
+                                                                            class="icon-link pseudo-link" rel="nofollow">
+                                                 <i class="i i-alert-blue"></i>&nbsp;<span>Пожаловаться</span></a>
+                                             </span>
+                                             </form>
+
+                                        </div>
+                                        {% endif %}
+
 
                                         </div>
                                     </div>

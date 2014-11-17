@@ -28,7 +28,7 @@
                             <i class="i i-profile"></i><span class="fader">Login</span> </a>
                     {% else %}
                         <a class="header__profile-enter__link " href="{% url 'Logout' %}">
-                            <i class="i i-profile"></i><span class="fader">Logout</span> </a>
+                            <i class="i i-profile"></i><span class="fader">{{ username }} : Logout</span> </a>
                     {% endif %}
                 </div>
 
@@ -40,12 +40,12 @@
     <div class="header-basic j-header-2">
         <div class="header-basic__inner clearfix">
             <div class="header__logo">
-                    <span class="b-logo"><span class="b-logo__img"></span>
-                    </span>
+                   <a href="{% url 'Main' %}" <span class="b-logo"><span class="b-logo__img"></span>
+                    </span> </a>
             </div>
             {% if auth %}
             <div class="header__add-item">
-                <a href="TODO" class="btn-plain btn-plain_blue">Make an advert</a>
+                <a href="{% url 'Add' %}" class="btn-plain btn-plain_blue">Make an advert</a>
             </div>
             {% endif %}
         </div>
