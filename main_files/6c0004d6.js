@@ -1,1 +1,0 @@
-var avito=avito||{};!function(){"use strict";avito.tracking.trackGA("UA-2546784-1",[["_setDetectTitle",!1],["_setDomainName","avito.ru"]])}();
