@@ -80,7 +80,7 @@ class LoginForm(forms.Form):
 
 class AddAdvertForm(forms.Form):
     title = forms.CharField(max_length=50)
-    text = forms.CharField(max_length=1000, min_length=30)
+    text = forms.CharField(max_length=1000, min_length=30, widget=forms.Textarea)
     price = forms.IntegerField()
     #date = forms.DateField(widget=SelectDateWidget)
     address = forms.CharField(max_length=300)
