@@ -1,12 +1,8 @@
 {% extends 'index.html' %}
 {% block main_column %}
-<form action="." method="post">
+<form action="{% url 'Login' %}" method="post">
     {% csrf_token %}
-    <p><label for="id_username">Login:</label><br>
-        <input id="id_username" type="text" name="username" maxlength="30" /></p>
-    </tr>
-    <p><label for="id_password">Password:</label><br>
-        <input type="password" name="password" id="id_password" maxlength="30" /></p>
+    {{ form.as_p }}
     <input type="submit" value="Login!" />
     </form>
 {% endblock %}

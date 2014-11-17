@@ -1,11 +1,11 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404
 from django.http import HttpResponseRedirect
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from BillboardTask.models import Category,  Advert,RegistrationForm,LoginForm
-from django.contrib.auth.models import User,UserManager
+from BillboardTask.models import Category, Advert, RegistrationForm, LoginForm
+from django.contrib.auth.models import User, UserManager
 
 # Create your views here.
 def main(request):
@@ -17,44 +17,35 @@ def main(request):
 
 def logout_view(request):
     logout(request)
-    return main(request)
+    return HttpResponseRedirect('/')
 
 
 def register(request):
-    reg_form = RegistrationForm()
     if request.method == 'POST':
         reg_form = RegistrationForm(request.POST)
         if reg_form.is_valid():
-            log = request.POST.get("username")
-            passw = request.POST.get("password")
+            log = reg_form.cleaned_data["username"]
+            passw = request.POST.get("password1")
             e_mail = request.POST.get("email")
-            if not User.objects.filter(username=log).exists():
-                User.objects.create_user(username=log, password=passw, email=e_mail)
-                user = authenticate(username=log, password=passw)
-                login(request, user)
-                return HttpResponse('Success ' + str(user))
-            else:
-                return HttpResponse('Nickname already used ' + str(log))
+            User.objects.create_user(username=log, password=passw, email=e_mail)
+            user = authenticate(username=log, password=passw)
+            login(request, user)
+            return HttpResponseRedirect('/')
+    else:
+        reg_form = RegistrationForm()
     return render(request, 'register.html', {'reg_form': reg_form})
 
 
 def login_view(request):
-    log_form = LoginForm()
     if request.method == 'POST':
-        log_form = LoginForm(request.POST)
-        if log_form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return HttpResponseRedirect("/")
-                else:
-                    return HttpResponse('Disabled user ' + str(user))
-            else:
-                return HttpResponse('Invaild login ')
-    return render(request, 'login.html', {'log_form': log_form})
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            if form.get_user():
+                login(request, form.get_user())
+                return HttpResponseRedirect('/')
+    else:
+        form = LoginForm()
+    return render(request, 'login.html', {'form': form})
 
 
 def category_view(request, cname):
@@ -77,19 +68,19 @@ def category_view(request, cname):
 def advert_view(request, cname, advid):
     category = Category.objects.get(name=cname)
 
-    #protection if user tries to change address with wrong id
+    # protection if user tries to change address with wrong id
     if not Advert.objects.filter(categories=category).filter(id=advid).exists():
         raise Http404
     else:
         adv = Advert.objects.get(pk=advid)
 
-        advert = {"name" : adv.title,
-                  "price" : adv.price,
-                  "text" : adv.text,
-                  "date" : adv.date,
-                  "catname" : cname,
-                  "address" : adv.address,
+        advert = {"name": adv.title,
+                  "price": adv.price,
+                  "text": adv.text,
+                  "date": adv.date,
+                  "catname": cname,
+                  "address": adv.address,
                   #"phone" : adv.phone,
-                  "image" : adv.image,
-                  "auth" : request.user.is_authenticated()}
+                  "image": adv.image,
+                  "auth": request.user.is_authenticated()}
         return render(request, 'advert.html', advert)
