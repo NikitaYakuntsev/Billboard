@@ -1,39 +1,9 @@
 from django.contrib.auth import authenticate
-from django.db import models
 from django import forms
 from django.contrib.auth.models import User
+from BillboardTask.models import Category
 
-
-# Create your models here.
-
-
-
-class Report(models.Model):
-    text = models.TextField(max_length=300)
-    id_advert = models.ForeignKey('Advert', related_name='report')
-    def __unicode__(self):
-        return str(self.id_advert)
-
-
-class Advert(models.Model):
-    id_user = models.ForeignKey(User)
-    title = models.CharField(max_length=50)
-    text = models.TextField(max_length=1000)
-    price = models.IntegerField()
-    date = models.DateField()
-    address = models.TextField(max_length=300)
-    phone = models.CharField(max_length=11)
-    categories = models.ManyToManyField('Category')
-    image = models.TextField(max_length=300)
-    def __unicode__(self):
-        return '%s. %s' % (self.id, self.title)
-
-class Category(models.Model):
-    name = models.CharField(max_length=30, unique=True)
-    image = models.TextField(max_length=300)
-    def __unicode__(self):
-        return str(self.id) + ". " + str(self.name)
-
+__author__ = 'nikitayakuntsev'
 
 
 class RegistrationForm(forms.Form):

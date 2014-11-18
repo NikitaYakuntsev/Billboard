@@ -57,14 +57,14 @@
                             <table class="full-an-header">
                                 <tr>
                                     <td>
-                                        <h1>{{ name }}</h1>
+                                        <h1>{{ adv.name }}</h1>
                                     </td>
                                     <td>
                                         <table>
                                             <tr class="fullAn-price">
                                                 <td>
                                                     <div class>
-                                                        {{ price }} руб.
+                                                        {{ adv.price }} руб.
                                                     </div>
                                                 </td>
                                             </tr>
@@ -83,7 +83,7 @@
                                                             <ul>
                                                                 <li id="f_a_image_2023491" data-index="0">
                                                                        <a class="image selected userstyle_gallery_thumbs_link userstyle_gallery_thumbs_link_selected">
-                                                                <img class="userstyle_gallery_thumbs_img" src="{{ image }}" width="90%" alt="{{ name }}">
+                                                                <img class="userstyle_gallery_thumbs_img" src="{{ adv.image }}" width="90%" alt="{{ adv.name }}">
                                                                 </a>
                                                                 </li>
                                                             </ul>
@@ -91,7 +91,7 @@
                                                     </td>
                                                     <td>
                                                         <div id="gallery-content">
-                                                            <img class="userstyle_gallery_img" src="{{ image }}" alt="{{ name }}" width="90%" height="90%">
+                                                            <img class="userstyle_gallery_img" src="{{ adv.image }}" alt="{{ adv.name }}" width="90%" height="90%">
                                                             <script type="text/javascript">
                                                                 $(function () {
                                                                     $('#gallery-thumbs a.image, a.text, a.video, a.audio').on('click', function (e) {
@@ -109,23 +109,23 @@
                                             <div class="location">
                                                 <div class="an_property_generic_list">Расположение:</div>
                                                 <div class="an_property_value">
-                                                    {{ address }}
+                                                    {{ adv.address }}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="properties-block">
                                             <table style="border-spacing: 0; width: auto;">
                                                 <td class="an_property_generic_full_td">Цена:&nbsp;</td>
-                                                <td style="padding-right: 30px;">{{ price }} руб.</td>
+                                                <td style="padding-right: 30px;">{{ adv.price }} руб.</td>
                                                 <td colspan="2"></td>
                                                 </tr>
                                             </table>
                                         </div>
                                         <div class="view-an">
-                                            {{ text }}
+                                            {{ adv.text }}
                                         </div>
                                         <div style="margin-left: 20px; margin-bottom: 20px;">
-                                            {{ date }}
+                                            {{ adv.date }}
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                                                     <div class="contact">
                                                         <div class="contact-text">
                                                             {% if auth %}
-                                                            {{ phone }}
+                                                            {{ adv.phone }}
                                                             {% else %}
                                                             You must be logged in
                                                             {% endif %}

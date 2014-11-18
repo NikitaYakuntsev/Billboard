@@ -5,8 +5,9 @@ from django.shortcuts import render, redirect, render_to_response
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 import datetime
-from BillboardTask.models import Category, Advert, Report, RegistrationForm, LoginForm, AddAdvertForm
-from django.contrib.auth.models import User, UserManager
+from BillboardTask.models import Category, Advert, Report
+from BillboardTask.forms import RegistrationForm, LoginForm, AddAdvertForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 def main(request):
@@ -25,10 +26,10 @@ def logout_view(request):
 def register(request):
     if request.method == 'POST':
         reg_form = RegistrationForm(request.POST)
-        if reg_form.is_valid() and reg_form.is_bound:
+        if reg_form.is_valid():
             log = reg_form.cleaned_data["username"]
-            passw = request.POST.get("password1")
-            e_mail = request.POST.get("email")
+            passw = reg_form.cleaned_data("password1")
+            e_mail = reg_form.cleaned_data("email")
             User.objects.create_user(username=log, password=passw, email=e_mail)
             user = authenticate(username=log, password=passw)
             login(request, user)
@@ -41,7 +42,7 @@ def register(request):
 def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        if form.is_valid() and form.is_bound:
+        if form.is_valid():
             if form.get_user():
                 login(request, form.get_user())
                 return HttpResponseRedirect('/')
@@ -77,16 +78,13 @@ def advert_view(request, cname, advid):
     else:
         adv = Advert.objects.get(pk=advid)
 
-        advert = {"name": adv.title,
-                  "price": adv.price,
-                  "text": adv.text,
-                  "date": adv.date,
+        advert = {"adv": adv,
                   "catname": cname,
-                  "address": adv.address,
-                  "phone" : adv.phone,
-                  "image": adv.image,
                   "auth": request.user.is_authenticated(),
-                  "username": request.user.username}
+                  "username": request.user.username
+        }
+
+
         return render(request, 'advert.html', advert)
 
 
@@ -126,7 +124,7 @@ def add_advert(request):
 
 
 def abuse(request, cname, advid):
-    #get will have no effect
+    #GET will have no effect
     if request.method == "POST":
         rep = Report(text="", id_advert_id=advid)
         rep.save()
